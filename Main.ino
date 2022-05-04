@@ -107,5 +107,6 @@ void loop()
   XBee_Okuma();
   Telemetri_olusturma();
   SD_kart();
+  String_to_Payload();
   
 }
