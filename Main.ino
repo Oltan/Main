@@ -104,5 +104,8 @@ void loop()
   while (gps.available( gpsPort )) {
   GPSloop();
   }
+  XBee_Okuma();
+  Telemetri_olusturma();
+  SD_kart();
   
 }
