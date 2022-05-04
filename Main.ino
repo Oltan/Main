@@ -11,6 +11,9 @@ static gps_fix  fix; // This contains all the parsed pieces
 int ref_basinc = 101500;
 Adafruit_BMP085 bmp;
 
+static float sicaklik;
+static int32_t basinc, ref_basinc, yukseklik;
+
 //bno_055
 //
 #include <Wire.h>
@@ -20,6 +23,7 @@ Adafruit_BMP085 bmp;
 //
 Adafruit_BNO055 bno = Adafruit_BNO055(-1, 0x28);
 
+static double pitch, roll, yaw;
 
 //SD kart kutuphaneleri
 #include <SD.h>
@@ -44,7 +48,10 @@ ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
 //Telemetri paket bilgileri
 
-String telemetri;
+String telemetri_string = "";
+String gps_saat_string = "";
+String gps_konum_string = "";
+String gps_yukseklik_string = "";
 String takim_no = "1234";
 int paket_sayisi = 0;
 
@@ -87,10 +94,15 @@ void setup()
 
 void loop()
 {
+  
+  Basinc();
 
-
+  
+  Bnoloop();
+  
   
   while (gps.available( gpsPort )) {
   GPSloop();
   }
+  
 }
