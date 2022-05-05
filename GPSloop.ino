@@ -32,10 +32,12 @@ static void GPSloop()
     if(fix.valid.location){
       gps_konum_string += "<";
       gps_konum_string += String(fix.latitude(),6);
+      gps_lat = fix.latitudeL();
       gps_konum_string += ">";
       gps_konum_string += ",";
       gps_konum_string += "<";
       gps_konum_string += String(fix.longitude(),6);
+      gps_lon = fix.longitudeL();
       gps_konum_string += ">,";
       } 
    if (fix.valid.altitude){

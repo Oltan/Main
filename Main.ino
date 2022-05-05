@@ -6,6 +6,8 @@ static gps_fix  fix; // This contains all the parsed pieces
 
 #include <GPSport.h>
 
+int32_t gps_lon, gps_lat;
+
 //BMP180
 #include <Adafruit_BMP085.h>
 int ref_basinc = 101500;
@@ -47,6 +49,11 @@ ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
 ZBRxResponse rx = ZBRxResponse();
 ModemStatusResponse msr = ModemStatusResponse();
+
+//Servo ESC'ler icin
+#include<Servo.h>
+
+Servo ESC1,ESC2,ESC3,ESC4;
 
 
 
