@@ -1,0 +1,12 @@
+void pidhesaplama(){
+  //Roll hesaplamalari
+  
+
+    
+
+  
+
+
+
+  
+}
