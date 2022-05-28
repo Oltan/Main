@@ -1,5 +1,5 @@
 void XBee_Gonder(){
-  xbee.send(zbTx)
+  xbee.send(zbTx);
 
   if (xbee.readPacket(500)) {
     Serial.println("Lokal XBee calisti.");
@@ -12,7 +12,7 @@ void XBee_Gonder(){
       }
     }
   } else if (xbee.getResponse().isError()) {
-    Serial.print("Paket okunurken hata. Hata kodu: ");  
+    Serial.print("Cevap alinirken hata alindi. Hata kodu: ");  
     Serial.println(xbee.getResponse().getErrorCode());
   } else {
     Serial.println("Lokal XBee calismiyor, kablolamayi kontrol et");

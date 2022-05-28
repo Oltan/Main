@@ -9,11 +9,11 @@ static gps_fix  fix; // This contains all the parsed pieces
 int32_t gps_lon, gps_lat;
 
 //BMP180
-#include <Adafruit_BMP085.h>
-int ref_basinc = 101500;
-Adafruit_BMP085 bmp;
+//#include <Adafruit_BMP085.h>
+//int ref_basinc = 101500;
+//Adafruit_BMP085 bmp;
 
-static float sicaklik;
+//static float sicaklik;
 //static int32_t basinc, ref_basinc, yukseklik;
 
 //bno_055
@@ -25,7 +25,7 @@ static float sicaklik;
 //
 Adafruit_BNO055 bno = Adafruit_BNO055(-1, 0x28);
 
-static double pitch, roll, yaw;
+double pitch, roll, yaw;
 
 //SD kart kutuphaneleri
 #include <SD.h>
@@ -38,12 +38,12 @@ const int chipSelect = BUILTIN_SDCARD;
 #include <XBee.h>
 
 XBee xbee = XBee();
-
+XBeeResponse response = XBeeResponse();
 unsigned long start = millis();
 
-uint8_t payload[80];//Yollanacak byte dizisi
+uint8_t payload[200];//Yollanacak byte dizisi
 
-XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x403e0f30);
+XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x40de14d6);
 ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
 ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
@@ -51,35 +51,37 @@ ZBRxResponse rx = ZBRxResponse();
 ModemStatusResponse msr = ModemStatusResponse();
 
 //Servo ESC'ler icin
-#include<Servo.h>
-
-Servo ESC1,ESC2,ESC3,ESC4;
+//#include<Servo.h>
+//
+//Servo ESC1,ESC2,ESC3,ESC4;
 
 
 
 
 //Telemetri paket bilgileri
 
-String telemetri_string = "";
-String gps_saat_string = "";
-String gps_konum_string = "";
-String gps_yukseklik_string = "";
-String XBee_paket = "";
+String telemetri_string;
+String gps_saat_string;
+String gps_konum_string;
+String gps_yukseklik_string;
+String XBee_paket;
 String takim_no = "1234";
 int paket_sayisi = 0;
-char paket[80];
+char paket[200];
 
 void setup()
 {
   Serial.begin(9600);
+  Serial2.begin(9600);
+  xbee.begin(Serial2);
   while (!Serial);
 
-//  while(!bno.begin())
-//  {
-//    /* There was a problem detecting the BNO055 ... check your connections */
-//    Serial.print("BNO_055 baglantisini kontrol et.");
-//    
-//  }
+  while(!bno.begin())
+  {
+    /* There was a problem detecting the BNO055 ... check your connections */
+    Serial.print("BNO_055 baglantisini kontrol et.");
+    
+  }
 //
 //  if (!bmp.begin()) {
 //    
@@ -89,7 +91,7 @@ void setup()
 //
 //  ref_basinc = bmp.readPressure();// Olunan yeri 0m kabul etmek için referans alinir.
 
-  Serial.begin("SD kart baglantisi kuruluyor.");
+  Serial.println("SD kart baglantisi kuruluyor.");
   
   if (!SD.begin(chipSelect)) {
     Serial.println("Kart bozuk veya bagli degil.");
@@ -97,9 +99,9 @@ void setup()
   }
   Serial.println("Kart baglantisi yapildi.");
 
-  Serial1.begin(9600);
   
-  xbee.setSerial(Serial1);
+  
+  xbee.setSerial(Serial2);
   
   gpsPort.begin( 9600 );
 }
@@ -112,7 +114,7 @@ void loop()
 //  Basinc();
 //
 //  
-//  Bnoloop();
+  Bnoloop();
 //  pidhesaplama();
   
   
@@ -120,8 +122,9 @@ void loop()
   GPSloop();
   }
   XBee_paket = XBee_Okuma();
-  Telemetri_olusturma();
-  SD_kart();
+  Serial.println(XBee_paket);
+  Telemetri_olusturma(XBee_paket);
+  SD_Kart();
   String_to_Payload();
   XBee_Gonder();
   
