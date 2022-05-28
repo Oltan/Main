@@ -14,7 +14,7 @@ int ref_basinc = 101500;
 Adafruit_BMP085 bmp;
 
 static float sicaklik;
-static int32_t basinc, ref_basinc, yukseklik;
+//static int32_t basinc, ref_basinc, yukseklik;
 
 //bno_055
 //
@@ -67,26 +67,27 @@ String gps_yukseklik_string = "";
 String XBee_paket = "";
 String takim_no = "1234";
 int paket_sayisi = 0;
+char paket[80];
 
 void setup()
 {
   Serial.begin(9600);
   while (!Serial);
 
-  while(!bno.begin())
-  {
-    /* There was a problem detecting the BNO055 ... check your connections */
-    Serial.print("BNO_055 baglantisini kontrol et.");
-    
-  }
-
-  if (!bmp.begin()) {
-    
-  Serial.println("BMP180 baglantisi kontrol et.");
-  while (!bmp.begin());
-  }
-
-  ref_basinc = bmp.readPressure();// Olunan yeri 0m kabul etmek için referans alinir.
+//  while(!bno.begin())
+//  {
+//    /* There was a problem detecting the BNO055 ... check your connections */
+//    Serial.print("BNO_055 baglantisini kontrol et.");
+//    
+//  }
+//
+//  if (!bmp.begin()) {
+//    
+//  Serial.println("BMP180 baglantisi kontrol et.");
+//  while (!bmp.begin());
+//  }
+//
+//  ref_basinc = bmp.readPressure();// Olunan yeri 0m kabul etmek için referans alinir.
 
   Serial.begin("SD kart baglantisi kuruluyor.");
   
@@ -96,9 +97,9 @@ void setup()
   }
   Serial.println("Kart baglantisi yapildi.");
 
-  Serial2.begin(9600);
+  Serial1.begin(9600);
   
-  xbee.setSerial(Serial2);
+  xbee.setSerial(Serial1);
   
   gpsPort.begin( 9600 );
 }
@@ -108,11 +109,11 @@ void setup()
 void loop()
 {
   
-  Basinc();
-
-  
-  Bnoloop();
-  pidhesaplama();
+//  Basinc();
+//
+//  
+//  Bnoloop();
+//  pidhesaplama();
   
   
   while (gps.available( gpsPort )) {

@@ -12,7 +12,7 @@ void XBee_Gonder(){
       }
     }
   } else if (xbee.getResponse().isError()) {
-    Serial.print("Error reading packet.  Error code: ");  
+    Serial.print("Paket okunurken hata. Hata kodu: ");  
     Serial.println(xbee.getResponse().getErrorCode());
   } else {
     Serial.println("Lokal XBee calismiyor, kablolamayi kontrol et");
