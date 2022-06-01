@@ -43,7 +43,7 @@ unsigned long start = millis();
 
 uint8_t payload[200];//Yollanacak byte dizisi
 
-XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x40de14d6);
+XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x418fe9d8);
 ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
 ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
@@ -98,10 +98,6 @@ void setup()
     while (!SD.begin(chipSelect));
   }
   Serial.println("Kart baglantisi yapildi.");
-
-  
-  
-  xbee.setSerial(Serial2);
   
   gpsPort.begin( 9600 );
 }
