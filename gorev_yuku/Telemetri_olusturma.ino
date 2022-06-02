@@ -1,5 +1,5 @@
 void Telemetri_olusturma(String girdi){
-    string irtifa_string[4];
+    String irtifa_string;
     int irtifa_2;
     double z_hizi=0;
     double gerilim=11.6;
@@ -28,7 +28,7 @@ void Telemetri_olusturma(String girdi){
     {
         irtifa_string += girdi[i];
     }
-    irtifa_2 = irtifa_string.toint();
+    irtifa_2 = irtifa_string.toInt();
     telemetri_string += ",<" + String(alt-irtifa_2) + ">"; 
     telemetri_string += ",<" + String(z_hizi, 2) + ">";
     telemetri_string += ",<" + String(sicaklik) + ">";

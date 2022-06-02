@@ -11,7 +11,6 @@ int alt;
 
 //BMP180
 #include <Adafruit_BMP085.h>
-int ref_basinc = 101500;
 Adafruit_BMP085 bmp;
 
 static float sicaklik;
@@ -108,7 +107,7 @@ void setup()
 void loop()
 {
   
-//  Basinc();
+  basinc_hesap();
 //
 //  
   Bnoloop();
