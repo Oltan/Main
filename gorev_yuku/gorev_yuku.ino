@@ -41,7 +41,7 @@ XBee xbee = XBee();
 XBeeResponse response = XBeeResponse();
 unsigned long start = millis();
 
-uint8_t payload[200];//Yollanacak byte dizisi
+uint8_t payload[178];//Yollanacak byte dizisi
 
 XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x418fe9d8);
 ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
@@ -65,9 +65,9 @@ String gps_saat_string;
 String gps_konum_string;
 String gps_yukseklik_string;
 String XBee_paket;
-String takim_no = "1234";
-int paket_sayisi = 0;
-char paket[200];
+String takim_no = "320421";
+int paket_sayisi = 1;
+char paket[178];
 
 void setup()
 {
@@ -116,6 +116,7 @@ void loop()
   
   while (gps.available( gpsPort )) {
   GPSloop();
+  
   }
   XBee_paket = XBee_Okuma();
   Serial.println(XBee_paket);
