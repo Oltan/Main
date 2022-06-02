@@ -1,12 +1,14 @@
 void String_to_Payload(){
-  int i=1;
-  int str_len = telemetri_string.length();
-  char char_array[str_len];
+  char char_array[36];
   telemetri_string.toCharArray(char_array,str_len); 
-  while(str_len>i){
+  for (int i = 0; i < 36; i++)
+  {
     payload[i-1]=char_array[i-1];
     i++;
   }
+  
+    
+  
 
   
 }

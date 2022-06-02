@@ -7,14 +7,15 @@ static gps_fix  fix; // This contains all the parsed pieces
 #include <GPSport.h>
 
 int32_t gps_lon, gps_lat;
+int alt;
 
 //BMP180
-//#include <Adafruit_BMP085.h>
-//int ref_basinc = 101500;
-//Adafruit_BMP085 bmp;
+#include <Adafruit_BMP085.h>
+int ref_basinc = 101500;
+Adafruit_BMP085 bmp;
 
-//static float sicaklik;
-//static int32_t basinc, ref_basinc, yukseklik;
+static float sicaklik;
+static int32_t basinc, ref_basinc, yukseklik;
 
 //bno_055
 //
@@ -41,7 +42,7 @@ XBee xbee = XBee();
 XBeeResponse response = XBeeResponse();
 unsigned long start = millis();
 
-uint8_t payload[178];//Yollanacak byte dizisi
+uint8_t payload[179];//Yollanacak byte dizisi
 
 XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x418fe9d8);
 ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
@@ -67,7 +68,7 @@ String gps_yukseklik_string;
 String XBee_paket;
 String takim_no = "320421";
 int paket_sayisi = 1;
-char paket[178];
+char paket[36];
 
 void setup()
 {
@@ -83,13 +84,13 @@ void setup()
     
   }
 //
-//  if (!bmp.begin()) {
-//    
-//  Serial.println("BMP180 baglantisi kontrol et.");
-//  while (!bmp.begin());
-//  }
-//
-//  ref_basinc = bmp.readPressure();// Olunan yeri 0m kabul etmek için referans alinir.
+  if (!bmp.begin()) {
+    
+  Serial.println("BMP180 baglantisi kontrol et.");
+  while (!bmp.begin());
+  }
+
+  ref_basinc = bmp.readPressure();// Olunan yeri 0m kabul etmek için referans alinir.
 
   Serial.println("SD kart baglantisi kuruluyor.");
   
