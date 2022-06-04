@@ -52,8 +52,9 @@ void loop() {
   
   while (gps.available( gpsPort )) {
   GPSloop();
-  }
   Telemetri();
+  }
+
   String_to_Payload();
   XBee_Gonder();
 }

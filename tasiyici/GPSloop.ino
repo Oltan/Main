@@ -13,7 +13,7 @@ static void GPSloop()
     
    
     gps_yukseklik_string += "<";
-    gps_yukseklik_string += String( fix.altitude(),6);
+    gps_yukseklik_string += String(fix.altitude());
     gps_yukseklik_string += ">";
   
 

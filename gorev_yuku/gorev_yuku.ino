@@ -43,7 +43,7 @@ XBeeResponse response = XBeeResponse();
 ZBRxResponse rx = ZBRxResponse();
 ModemStatusResponse msr = ModemStatusResponse();
 
-uint8_t payload[179];//Yollanacak byte dizisi
+uint8_t payload[184];//Yollanacak byte dizisi
 
 XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x418fe9d8);
 ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
@@ -68,7 +68,7 @@ String gps_yukseklik_string;
 String XBee_paket;
 String takim_no = "320421";
 int paket_sayisi = 1;
-char paket[36];
+char paket[40];
 
 void setup()
 {

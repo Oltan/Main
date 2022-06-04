@@ -34,7 +34,7 @@ void Telemetri_olusturma(String girdi){
     telemetri_string += ",<" + String(sicaklik) + ">";
     telemetri_string += ",<" + String(gerilim,1)+ ">";
     telemetri_string += gps_konum_string + gps_yukseklik_string;
-    for (int i = 13; i <= 35; i++)
+    for (int i = 18; i <= 40; i++)
     {
         telemetri_string += girdi[i];
     }

@@ -23,7 +23,7 @@ ModemStatusResponse msr = ModemStatusResponse();
 void setup(){
 	Serial.begin(9600);
 	Serial1.begin(9600);
-  xbee.begin(Serial1);
+  xbee.Setserial(Serial1);//değiştir
   
 
 }
