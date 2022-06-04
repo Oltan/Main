@@ -6,6 +6,6 @@ void Telemetri(){
     telemetri_string += "<" + String(yukseklik) + ">,";
     telemetri_string += gps_yukseklik_string;
     telemetri_string += gps_konum_string;
-    
+    Serial.println(telemetri_string);
     
 }

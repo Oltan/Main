@@ -39,7 +39,9 @@ const int chipSelect = BUILTIN_SDCARD;
 
 XBee xbee = XBee();
 XBeeResponse response = XBeeResponse();
-unsigned long start = millis();
+
+ZBRxResponse rx = ZBRxResponse();
+ModemStatusResponse msr = ModemStatusResponse();
 
 uint8_t payload[179];//Yollanacak byte dizisi
 
@@ -47,8 +49,7 @@ XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x418fe9d8);
 ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
 ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
-ZBRxResponse rx = ZBRxResponse();
-ModemStatusResponse msr = ModemStatusResponse();
+
 
 //Servo ESC'ler icin
 //#include<Servo.h>
@@ -73,8 +74,14 @@ void setup()
 {
   Serial.begin(9600);
   Serial2.begin(9600);
-  xbee.begin(Serial2);
+  xbee.setSerial(Serial2);
   while (!Serial);
+
+  if (!bmp.begin()) {
+    
+  Serial.println("BMP180 baglantisi kontrol et.");
+  while (!bmp.begin());
+  }
 
   while(!bno.begin())
   {
@@ -83,11 +90,7 @@ void setup()
     
   }
 //
-  if (!bmp.begin()) {
-    
-  Serial.println("BMP180 baglantisi kontrol et.");
-  while (!bmp.begin());
-  }
+  
 
   ref_basinc = bmp.readPressure();// Olunan yeri 0m kabul etmek için referans alinir.
 
@@ -100,7 +103,6 @@ void setup()
   Serial.println("Kart baglantisi yapildi.");
   
   gpsPort.begin( 9600 );
-  delay(100000);
 }
 
 //--------------------------
@@ -120,7 +122,6 @@ void loop()
   
   }
   XBee_paket = XBee_Okuma();
-  Serial.print("oltan");
   Serial.println(XBee_paket);
   Telemetri_olusturma(XBee_paket);
   SD_Kart();
