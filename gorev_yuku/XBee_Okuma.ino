@@ -24,16 +24,16 @@ String XBee_Okuma(){
         // set dataLed PWM to value of the first byte in the data
         Serial.println("getdata fonksiyonu cagirildi.");
         
-        int a=1;
+        int a=0;
         while(a < 36){ 
-        paket[a-1] = rx.getData(a-1);
+        paket[a] = rx.getData(a);
         a++;
       }
 
         
-        int i=1;
+        int i=0;
         while(i<a){ 
-        Serial.print(paket[i-1]);
+        Serial.print(paket[i]);
         i++;
       }
 
@@ -60,8 +60,6 @@ String XBee_Okuma(){
    Serial.println("xbee devam ediyor.");   
    
    String cikti = String(paket);
-   Serial.println(cikti);
-   Serial.println(paket);
    
    return cikti;
         

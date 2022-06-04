@@ -100,6 +100,7 @@ void setup()
   Serial.println("Kart baglantisi yapildi.");
   
   gpsPort.begin( 9600 );
+  delay(100000);
 }
 
 //--------------------------
@@ -119,6 +120,7 @@ void loop()
   
   }
   XBee_paket = XBee_Okuma();
+  Serial.print("oltan");
   Serial.println(XBee_paket);
   Telemetri_olusturma(XBee_paket);
   SD_Kart();
