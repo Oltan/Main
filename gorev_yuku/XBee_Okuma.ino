@@ -1,6 +1,6 @@
 String XBee_Okuma(){
     Serial.println("xbee okuma basladi.");
-
+    String cikti;
     xbee.readPacket();
     
     
@@ -29,7 +29,8 @@ String XBee_Okuma(){
           paket[i]=rx.getData(i);
         }
         Serial.println(paket);
-
+        cikti = String(paket);
+        return cikti;
       
        
       } else if (xbee.getResponse().getApiId() == MODEM_STATUS_RESPONSE) {
@@ -50,9 +51,8 @@ String XBee_Okuma(){
       Serial.print("Paket okunurken hata olustu.  Hata kodu: ");  
       Serial.println(xbee.getResponse().getErrorCode());
     }
-   Serial.println("xbee devam ediyor.");   
-   
-   String cikti = String(paket);
+   Serial.println("hata paket okunamadı.");   
+   cikti = "<00>,<00>";
    
    return cikti;
         
