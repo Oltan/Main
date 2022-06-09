@@ -2,7 +2,9 @@ String XBee_Okuma(){
     Serial.println("xbee okuma basladi.");
     String cikti;
     xbee.readPacket();
-    
+    char debug;
+    //debug = Serial2.read();
+    //Serial.print(debug);
     
     
     if (xbee.getResponse().isAvailable()) {

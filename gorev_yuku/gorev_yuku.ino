@@ -117,15 +117,24 @@ void loop()
 //  pidhesaplama();
   
   //while kaldırabilir aslında ama tam emin olamadım. while kaldırılıp test edilebilir.
-  while (gps.available( gpsPort )) {
-  GPSloop();//
+  if (gps.available( gpsPort )) {
+    GPSloop();//
   break;
   }
-  XBee_paket = XBee_Okuma();
+  else{
+    GPS_Bos();
+  }
+
+  
   Serial.println(XBee_paket);
   Telemetri_olusturma(XBee_paket);
   SD_Kart();
   String_to_Payload();
   XBee_Gonder();
   
+}
+
+
+void serialEvent2() {
+  XBee_paket = XBee_Okuma();
 }
