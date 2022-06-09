@@ -116,10 +116,10 @@ void loop()
   Bnoloop();
 //  pidhesaplama();
   
-  
+  //while kaldırabilir aslında ama tam emin olamadım. while kaldırılıp test edilebilir.
   while (gps.available( gpsPort )) {
-  GPSloop();
-  
+  GPSloop();//
+  break;
   }
   XBee_paket = XBee_Okuma();
   Serial.println(XBee_paket);
