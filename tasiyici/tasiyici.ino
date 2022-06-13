@@ -12,7 +12,7 @@ int32_t gps_lon, gps_lat;
 
 XBee xbee = XBee();
 
-uint8_t payload[36];
+uint8_t payload[43];
 
 // SH + SL Address of receiving XBee
 XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x403e0f30);
@@ -50,11 +50,13 @@ void setup() {
 
 void loop() {
   
-  while (gps.available( gpsPort )) {
-  GPSloop();
-  Telemetri();
+  if (gps.available( gpsPort )) {
+    GPSloop();
   }
-
+  else{
+    GPS_Bos();
+  }
+  Telemetri();
   String_to_Payload();
   XBee_Gonder();
 }

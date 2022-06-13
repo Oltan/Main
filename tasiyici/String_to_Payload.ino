@@ -1,7 +1,7 @@
 void String_to_Payload(){
-  char char_array[40];
-  telemetri_string.toCharArray(char_array,36); 
-  for (int i = 0; i < 40; i++)
+  char char_array[43];
+  telemetri_string.toCharArray(char_array,43); 
+  for (int i = 0; i < 43; i++)
   {
     payload[i]=char_array[i];
   }

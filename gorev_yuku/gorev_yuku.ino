@@ -49,6 +49,9 @@ XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x418fe9d8);
 ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
 ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
+#define SERIAL2_TX_BUFFER_SIZE  256
+#define SERIAL2_RX_BUFFER_SIZE 256
+
 
 
 //Servo ESC'ler icin
@@ -68,7 +71,7 @@ String gps_yukseklik_string;
 String XBee_paket;
 String takim_no = "320421";
 int paket_sayisi = 1;
-char paket[40];
+char paket[43];
 
 void setup()
 {
@@ -125,16 +128,11 @@ void loop()
     GPS_Bos();
   }
 
-  
+  XBee_paket = XBee_Okuma();
   Serial.println(XBee_paket);
   Telemetri_olusturma(XBee_paket);
   SD_Kart();
   String_to_Payload();
   XBee_Gonder();
   
-}
-
-
-void serialEvent2() {
-  XBee_paket = XBee_Okuma();
 }

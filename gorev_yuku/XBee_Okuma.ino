@@ -2,7 +2,7 @@ String XBee_Okuma(){
     Serial.println("xbee okuma basladi.");
     String cikti;
     xbee.readPacket();
-    char debug;
+    //char debug;
     //debug = Serial2.read();
     //Serial.print(debug);
     
@@ -27,10 +27,9 @@ String XBee_Okuma(){
         Serial.println("getdata fonksiyonu cagirildi.");
 
 
-        for (int i = 0; i < 36; i++){
+        for (int i = 0; i < 43; i++){
           paket[i]=rx.getData(i);
         }
-        Serial.println(paket);
         cikti = String(paket);
         return cikti;
       
@@ -54,7 +53,7 @@ String XBee_Okuma(){
       Serial.println(xbee.getResponse().getErrorCode());
     }
    Serial.println("hata paket okunamadı.");   
-   cikti = "<00>,<00>";
+   cikti = "<000000>,<000>,<0.000000>,<0.000000>,<0000>";
    
    return cikti;
         

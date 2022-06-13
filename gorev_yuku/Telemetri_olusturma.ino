@@ -20,21 +20,21 @@ void Telemetri_olusturma(String girdi){
     }
     telemetri_string += ",";
     telemetri_string += "<" + String(yukseklik) + ">,";
-    for (int i = 8; i <= 12; i++)
+    for (int i = 9; i <= 13; i++)
     {
         telemetri_string += girdi[i];//yükseklik2 yazdırılır
     }
-    for (int i = 9; i <= 11; i++)
+    for (int i = 9; i <= 12; i++)
     {
         irtifa_string += girdi[i];
     }
     irtifa_2 = irtifa_string.toInt();
-    telemetri_string += ",<" + String(alt-irtifa_2) + ">"; 
+    telemetri_string += ",<" + String(0) + ">"; 
     telemetri_string += ",<" + String(z_hizi, 2) + ">";
     telemetri_string += ",<" + String(sicaklik) + ">";
     telemetri_string += ",<" + String(gerilim,1)+ ">";
     telemetri_string += gps_konum_string + gps_yukseklik_string;
-    for (int i = 18; i <= 40; i++)
+    for (int i = 14; i <= 43; i++)
     {
         telemetri_string += girdi[i];
     }
