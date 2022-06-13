@@ -41,7 +41,9 @@ static void GPSloop()
 
     gps_yukseklik_string += "<";
     alt = fix.altitude();
-    gps_yukseklik_string += String( alt );
+    String yukseklik;
+    sprintf(yukseklik,"%03d",alt);
+    gps_yukseklik_string += yukseklik;
     gps_yukseklik_string += ">,";
     /*if (fix.valid.altitude && fix.valid.date && fix.valid.time) {//BU kodu daha denemedim, kütüphane sayfasından buldum.
       dt = (clock_t) fix.dateTime - (clock_t) fix.dateTime;
@@ -91,7 +93,10 @@ static void GPS_Bos(){
 
     gps_yukseklik_string += "<";
     alt = 0;
-    gps_yukseklik_string += String( alt );
+    alt = fix.altitude();
+    String yukseklik;
+    sprintf(yukseklik,"%03d",alt);
+    gps_yukseklik_string += yukseklik;
     gps_yukseklik_string += ">,";
 
 
