@@ -31,6 +31,7 @@ String XBee_Okuma(){
           paket[i]=rx.getData(i);
         }
         cikti = String(paket);
+        Serial2.clear();
         return cikti;
       
        
@@ -43,7 +44,7 @@ String XBee_Okuma(){
         } else if (msr.getStatus() == DISASSOCIATED) {
           Serial.println("dissasociated");
         } else {
-          Serial.println("hatali durum3"); 
+          Serial.println("Hatali durum3"); 
         }
       } else {
         Serial.println("Hatali durum4");  
