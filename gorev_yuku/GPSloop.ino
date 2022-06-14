@@ -31,7 +31,7 @@ static void GPSloop()
 
     gps_yukseklik_string += "<";
     alt = fix.altitude();
-    String altit_string;
+    char altit_string[4];
     sprintf_P(altit_string,PSTR("%03d"),alt);
     gps_yukseklik_string += altit_string;
     gps_yukseklik_string += ">,";
@@ -83,7 +83,7 @@ static void GPS_Bos(){
 
     gps_yukseklik_string += "<";
     alt = 0;
-    String altit_string;
+    char altit_string[4];
     sprintf_P(altit_string,PSTR("%03d"),alt);
     gps_yukseklik_string += altit_string;
     gps_yukseklik_string += ">,";

@@ -5,5 +5,4 @@ void String_to_Payload(){
   {
     payload[i]=char_array[i];
   }
-  Serial.println(char_array);
 }

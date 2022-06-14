@@ -7,6 +7,7 @@ void XBee_Gonder(){
       xbee.getResponse().getZBTxStatusResponse(txStatus);
       if (txStatus.getDeliveryStatus() == SUCCESS) {
         Serial.println("Paket basariyla gonderildi");
+        Serial2.clear();
       } else {
         Serial.println("Alici Xbee paketi almadi, adresi ve konfigurasyonu kontrol et.");
       }

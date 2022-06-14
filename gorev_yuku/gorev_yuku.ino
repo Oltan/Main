@@ -122,7 +122,6 @@ void loop()
   //while kaldırabilir aslında ama tam emin olamadım. while kaldırılıp test edilebilir.
   if (gps.available( gpsPort )) {
     GPSloop();//
-  break;
   }
   else{
     GPS_Bos();

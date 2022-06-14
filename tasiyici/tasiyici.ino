@@ -22,6 +22,7 @@ ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 #include <Adafruit_BMP085.h>
 int ref_basinc = 101500;
 Adafruit_BMP085 bmp;
+int yukseklik;
 
 String gps_konum_string;
 String gps_yukseklik_string;

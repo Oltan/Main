@@ -1,7 +1,7 @@
 static void GPSloop()
 {  
     fix = gps.read();
-    
+    int alt;
     
     gps_konum_string += "<";
     gps_konum_string += String(fix.latitude(),6);
@@ -12,10 +12,11 @@ static void GPSloop()
     
    
     gps_yukseklik_string += "<";
-    String altit_string;
-    sprintf_P(altit_string,PSTR("%04d"),altit);
-    //gps_yukseklik_string += String(fix.altitude());
-    gps_yukseklik_string += ">";
+    char altit_string[4];
+    alt = fix.altitude();
+    sprintf_P(altit_string,PSTR("%03d"),alt);
+    gps_yukseklik_string += altit_string;
+    gps_yukseklik_string += ">,";
   
 
 } // GPSloop
@@ -32,9 +33,10 @@ static void GPS_Bos(){
     
    
     gps_yukseklik_string += "<";
-    String altit_string;
-    sprintf_P(altit_string,PSTR("%04d"),altit);
+    int alt = 0;
+    char altit_string[4];
+    sprintf_P(altit_string,PSTR("%03d"),alt);
     gps_yukseklik_string += altit_string;
-    gps_yukseklik_string += ">";
+    gps_yukseklik_string += ">,";
 
 }
