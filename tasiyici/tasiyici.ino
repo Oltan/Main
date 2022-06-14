@@ -12,7 +12,7 @@ int32_t gps_lon, gps_lat;
 
 XBee xbee = XBee();
 
-uint8_t payload[43];
+uint8_t payload[41];
 
 // SH + SL Address of receiving XBee
 XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x403e0f30);

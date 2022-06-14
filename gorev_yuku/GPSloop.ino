@@ -2,16 +2,6 @@ static void GPSloop()
 {  
     fix = gps.read();
     // Display the local time
-    
-    gps_saat_string += ("<");
-    gps_saat_string += takim_no;
-    gps_saat_string += (">");
-    gps_saat_string += ",";
-    gps_saat_string += ("<");
-    gps_saat_string += String(paket_sayisi);
-    gps_saat_string += (">");
-    paket_sayisi++;
-    gps_saat_string += ",";
     gps_saat_string += ("<");
     gps_saat_string += String(fix.dateTime.date);
     gps_saat_string += ("/");
@@ -41,9 +31,9 @@ static void GPSloop()
 
     gps_yukseklik_string += "<";
     alt = fix.altitude();
-    String yukseklik;
-    sprintf(yukseklik,"%03d",alt);
-    gps_yukseklik_string += yukseklik;
+    String altit_string;
+    sprintf_P(altit_string,PSTR("%03d"),alt);
+    gps_yukseklik_string += altit_string;
     gps_yukseklik_string += ">,";
     /*if (fix.valid.altitude && fix.valid.date && fix.valid.time) {//BU kodu daha denemedim, kütüphane sayfasından buldum.
       dt = (clock_t) fix.dateTime - (clock_t) fix.dateTime;
@@ -93,10 +83,9 @@ static void GPS_Bos(){
 
     gps_yukseklik_string += "<";
     alt = 0;
-    alt = fix.altitude();
-    String yukseklik;
-    sprintf(yukseklik,"%03d",alt);
-    gps_yukseklik_string += yukseklik;
+    String altit_string;
+    sprintf_P(altit_string,PSTR("%03d"),alt);
+    gps_yukseklik_string += altit_string;
     gps_yukseklik_string += ">,";
 
 
