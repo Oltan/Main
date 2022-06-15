@@ -43,14 +43,14 @@ XBeeResponse response = XBeeResponse();
 ZBRxResponse rx = ZBRxResponse();
 ModemStatusResponse msr = ModemStatusResponse();
 
-uint8_t payload[184];//Yollanacak byte dizisi
+uint8_t payload[188];//Yollanacak byte dizisi
 
 XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x418fe9d8);
 ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
 ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
-#define SERIAL2_TX_BUFFER_SIZE  256
-#define SERIAL2_RX_BUFFER_SIZE 256
+#define SERIAL2_TX_BUFFER_SIZE 512
+#define SERIAL2_RX_BUFFER_SIZE 512
 
 
 

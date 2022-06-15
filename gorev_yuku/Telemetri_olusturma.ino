@@ -13,13 +13,21 @@ void Telemetri_olusturma(String girdi){
     telemetri_string += ",";
     telemetri_string += gps_saat_string;
  //   telemetri_string += "<basinc>,<yukseklik>,<irtifafarki>,<inishizi>,<sicaklik>,<pilgerilim>,";
-    telemetri_string += "<" + String(basinc) + ">,<";
+    telemetri_string += "<";// + String(basinc) + ">";
+    char basinc_string[6];
+    sprintf_P(basinc_string,PSTR("%06d"),basinc);
+    telemetri_string += basinc_string;
+    telemetri_string += ">,";
     for (int i = 0; i <= 7; i++)
     {
         telemetri_string += girdi[i];//basinc2yi stringe yazar
     }
     telemetri_string += ",";
-    telemetri_string += "<" + String(yukseklik) + ">,";
+    telemetri_string += "<";// + String(yukseklik) + ">";
+    char yukseklik_string[3];
+    sprintf_P(yukseklik_string,PSTR("%03d"),yukseklik);
+    telemetri_string += yukseklik_string;
+    telemetri_string += ">,";
     for (int i = 8; i <= 12; i++)
     {
         telemetri_string += girdi[i];//yükseklik2 yazdırılır
@@ -32,13 +40,12 @@ void Telemetri_olusturma(String girdi){
     telemetri_string += ",<" + String(alt-irtifa_2) + ">"; 
     telemetri_string += ",<" + String(z_hizi, 2) + ">";
     telemetri_string += ",<" + String(sicaklik) + ">";
-    telemetri_string += ",<" + String(gerilim,1)+ ">";
-    telemetri_string += gps_konum_string + gps_yukseklik_string;
-    for (int i = 18; i <= 40; i++)
+    telemetri_string += ",<" + String(gerilim,1)+ ">,";
+    telemetri_string += gps_konum_string + "," + gps_yukseklik_string + ",";
+    for (int i = 13; i < 43; i++)
     {
         telemetri_string += girdi[i];
     }
     telemetri_string += "<1>,";
     telemetri_string += "<" + String(pitch) + ">,<" + String(roll) + ">,<" + String(yaw) + ">,<" + "0" + ">,<" + "hayir" + ">";
-    Serial.println(girdi);
 }

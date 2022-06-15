@@ -1,11 +1,22 @@
 String XBee_Okuma(){
     Serial.println("xbee okuma basladi.");
     String cikti;
-    xbee.readPacket();
-    //char debug;
-    //debug = Serial2.read();
-    //Serial.print(debug);
-    
+//     char debug[41];
+//        int i = 0;
+//        while(Serial2.available()>0){
+//          debug[i] = Serial2.read();
+//          i++;
+//          Serial.print(debug[i],HEX);
+//          if(i==41)break;
+//          }
+    xbee.readPacketUntilAvailable();
+
+//    xbee.readPacket();
+//    xbee.getResponse().getZBRxResponse(rx);
+//    for (int i = 0; i < 43; i++){
+//          paket[i]=rx.getData(i);
+//        }
+//        cikti = String(paket);
     
     if (xbee.getResponse().isAvailable()) {
       // got something
@@ -25,13 +36,12 @@ String XBee_Okuma(){
         }
         // set dataLed PWM to value of the first byte in the data
         Serial.println("getdata fonksiyonu cagirildi.");
-
-
+        
+      
         for (int i = 0; i < 43; i++){
           paket[i]=rx.getData(i);
         }
         cikti = String(paket);
-        Serial2.clear();
         return cikti;
       
        
@@ -53,8 +63,9 @@ String XBee_Okuma(){
       Serial.print("Paket okunurken hata olustu.  Hata kodu: ");  
       Serial.println(xbee.getResponse().getErrorCode());
     }
-   Serial.println("hata paket okunamadı.");   
-   cikti = "<000000>,<000>,<0.000000>,<0.000000>,<0000>";
+   Serial.println("hata paket okunamadı.");  
+   
+   cikti = "<000000><000><00.000000>,<00.000000>,<0000>";
    
    return cikti;
         

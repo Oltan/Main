@@ -12,10 +12,10 @@ int32_t gps_lon, gps_lat;
 
 XBee xbee = XBee();
 
-uint8_t payload[41];
+uint8_t payload[44];
 
 // SH + SL Address of receiving XBee
-XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x403e0f30);
+XBeeAddress64 addr64 = XBeeAddress64(0x0013a200, 0x418fe19f);
 ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
 ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
@@ -24,10 +24,9 @@ int ref_basinc = 101500;
 Adafruit_BMP085 bmp;
 int yukseklik;
 
-String gps_konum_string;
-String gps_yukseklik_string;
+
 String XBee_paket;
-String telemetri_string;
+
 
 
 
@@ -50,14 +49,16 @@ void setup() {
 }
 
 void loop() {
-  
+  String telemetri;
+  String gps_string;
   if (gps.available( gpsPort )) {
-    GPSloop();
+    gps_string = GPSloop();
   }
   else{
-    GPS_Bos();
+    gps_string = GPS_Bos();
   }
-  Telemetri();
-  String_to_Payload();
+  telemetri = Telemetri(gps_string);
+  String_to_Payload(telemetri);
   XBee_Gonder();
+  delay(1000);
 }

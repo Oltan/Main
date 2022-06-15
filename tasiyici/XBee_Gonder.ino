@@ -1,7 +1,7 @@
 void XBee_Gonder(){
   xbee.send(zbTx);
 
-  if (xbee.readPacket(500)) {
+  if (xbee.readPacket(3000)) {
     Serial.println("Lokal XBee calisti.");
     if (xbee.getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) {
       xbee.getResponse().getZBTxStatusResponse(txStatus);
