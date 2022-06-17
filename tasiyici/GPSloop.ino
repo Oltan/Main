@@ -1,32 +1,34 @@
 static String GPSloop()
 {  
-    String gps_string;
-    fix = gps.read();
-    int alt;
-    float lat = 0; float longt = 0;
-    gps_string += "<";
-    char lat_string[9];
-    lat = fix.latitude();
-    sprintf_P(lat_string,PSTR("%09.6f"),lat);
-    gps_string += lat_string;
-    gps_string += ">";
-    gps_string += ">";
-    gps_string += "<";
-    char longt_string[9];
-    longt = fix.longitude();
-    sprintf_P(longt_string,PSTR("%09.6f"),longt);
-    gps_string += longt_string;
-    gps_string += ">,";
+  String gps_string;
+  fix = gps.read();
+      if (fix.valid.location)
+      {
+            int alt;
+            float lat = 0; float longt = 0;
+            gps_string += "<";
+            char lat_string[9];
+            lat = fix.latitude();
+            sprintf_P(lat_string,PSTR("%09.6f"),lat);
+            gps_string += lat_string;
+            gps_string += ">";
+            gps_string += ">";
+            gps_string += "<";
+            char longt_string[9];
+            longt = fix.longitude();
+            sprintf_P(longt_string,PSTR("%09.6f"),longt);
+            gps_string += longt_string;
+            gps_string += ">,";
+            gps_string += "<";
+            char altit_string[4];
+            alt = fix.altitude();
+            sprintf_P(altit_string,PSTR("%04d"),alt);
+            gps_string += altit_string;
+            gps_string += ">,";
+            return gps_string;
+      }
+     
     
-   
-    gps_string += "<";
-    char altit_string[4];
-    alt = fix.altitude();
-    sprintf_P(altit_string,PSTR("%04d"),alt);
-    gps_string += altit_string;
-    gps_string += ">,";
-    return gps_string;
-
 } // GPSloop
 
 static String GPS_Bos(){

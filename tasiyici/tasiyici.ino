@@ -43,7 +43,7 @@ void setup() {
   ref_basinc = bmp.readPressure();// Olunan yeri 0m kabul etmek için referans alinir.
 
 
-  Serial2.begin(9600);
+  Serial2.begin(115200);
   xbee.setSerial(Serial2);
   gpsPort.begin( 9600 );
 }
@@ -55,12 +55,11 @@ void loop() {
     gps_string = GPSloop();
   }
   if(gps_string == NULL){
-//  else{
     gps_string = GPS_Bos();
-//  }
   }
   telemetri = Telemetri(gps_string);
   String_to_Payload(telemetri);
   XBee_Gonder();
+  gps_string = "";
   delay(1000);
 }

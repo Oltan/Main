@@ -76,7 +76,7 @@ char paket[43];
 void setup()
 {
   Serial.begin(9600);
-  Serial2.begin(9600);
+  Serial2.begin(115200);
   xbee.setSerial(Serial2);
   paket_sayisi = 1;
 //  while (!Serial);
@@ -127,9 +127,9 @@ void loop()
     gps_konum_string = GPS_konum();
     //GPSloop();//
   }
-  if(gps_saat_string == NULL){
+  if(gps_saat_string == NULL && gps_konum_string == NULL){
     GPS_Bos();
-    }
+  }
 
 
   XBee_paket = XBee_Okuma();
@@ -138,5 +138,7 @@ void loop()
   SD_Kart();
   String_to_Payload();
   XBee_Gonder();
-  telemetri_string = ""; 
+  telemetri_string = "";
+  gps_saat_string = "";
+  gps_konum_string = ""; 
 }
