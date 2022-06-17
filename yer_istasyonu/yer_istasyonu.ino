@@ -8,7 +8,7 @@ unsigned long video_size;
 
 //XBee
 #include <XBee.h>
-File videoFile;
+
 XBee xbee = XBee();
 XBeeResponse response = XBeeResponse();
 
@@ -39,13 +39,14 @@ void setup() {
     while (!SD.begin(chipSelect));
   }
   Serial.println("Kart baglantisi yapildi.");
-  videoFile = SD.open("video.mp4", FILE_READ);
-  video_size = videoFile.size();
+  
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
+  File videoFile;
+  videoFile = SD.open("12080003.csv", FILE_READ);
+  video_size = videoFile.size();
   if (videoFile) {
     int i = 0;
     while(videoFile.available()){

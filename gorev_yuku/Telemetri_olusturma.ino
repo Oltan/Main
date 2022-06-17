@@ -8,7 +8,8 @@ void Telemetri_olusturma(String girdi){
     telemetri_string += ">";
     telemetri_string += ",";
     telemetri_string += "<";
-    telemetri_string += String(paket_sayisi);paket_sayisi++;
+    telemetri_string += String(paket_sayisi);
+    paket_sayisi++;
     telemetri_string += ">";
     telemetri_string += ",";
     telemetri_string += gps_saat_string;
@@ -41,11 +42,24 @@ void Telemetri_olusturma(String girdi){
     telemetri_string += ",<" + String(z_hizi, 2) + ">";
     telemetri_string += ",<" + String(sicaklik) + ">";
     telemetri_string += ",<" + String(gerilim,1)+ ">,";
-    telemetri_string += gps_konum_string + "," + gps_yukseklik_string + ",";
+    telemetri_string += gps_konum_string;
     for (int i = 13; i < 43; i++)
     {
         telemetri_string += girdi[i];
     }
-    telemetri_string += "<1>,";
-    telemetri_string += "<" + String(pitch) + ">,<" + String(roll) + ">,<" + String(yaw) + ">,<" + "0" + ">,<" + "hayir" + ">";
+    telemetri_string += ",<1>,";
+    telemetri_string += "<";
+    char bno_string[3];
+    sprintf_P(bno_string,PSTR("%03.0f"),pitch);
+    telemetri_string += bno_string;
+    telemetri_string += ">,";
+    telemetri_string += "<";
+    sprintf_P(bno_string,PSTR("%03.0f"),roll);
+    telemetri_string += bno_string;
+    telemetri_string += ">,";
+    telemetri_string += "<";
+    sprintf_P(bno_string,PSTR("%03.0f"),roll);
+    telemetri_string += bno_string;
+    telemetri_string += ">,<hayir>";
+    //telemetri_string += "<" + String(pitch) + ">,<" + String(roll) + ">,<" + String(yaw) + ">,<" + "0" + ">,<" + "hayir" + ">";
 }

@@ -51,11 +51,13 @@ void setup() {
 void loop() {
   String telemetri;
   String gps_string;
-  if (gps.available( gpsPort )) {
+  while (gps.available( gpsPort )) {
     gps_string = GPSloop();
   }
-  else{
+  if(gps_string == NULL){
+//  else{
     gps_string = GPS_Bos();
+//  }
   }
   telemetri = Telemetri(gps_string);
   String_to_Payload(telemetri);
