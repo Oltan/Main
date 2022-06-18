@@ -61,5 +61,5 @@ void loop() {
   String_to_Payload(telemetri);
   XBee_Gonder();
   gps_string = "";
-  delay(1000);
+  //delay(1000);
 }
