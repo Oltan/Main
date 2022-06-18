@@ -3,7 +3,7 @@
 #include <SPI.h>
 
 const int chipSelect = BUILTIN_SDCARD;
-
+File videoFile;
 unsigned long video_size;
 
 //XBee
@@ -29,7 +29,7 @@ ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial2.begin(9600);
+  Serial2.begin(115200);
   xbee.setSerial(Serial2);
   //xbee.begin(Serial2);
   Serial.println("SD kart baglantisi kuruluyor.");
@@ -40,23 +40,22 @@ void setup() {
   }
   Serial.println("Kart baglantisi yapildi.");
   
+  videoFile = SD.open("video.mp4", FILE_READ);
+  video_size = videoFile.size();
+  
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  File videoFile;
-  videoFile = SD.open("12080003.csv", FILE_READ);
-  video_size = videoFile.size();
+  
   if (videoFile) {
     int i = 0;
-    while(videoFile.available()){
-        if (i>=240)
-        {
-            break;
-        }
+    while(i<240){
+        
         payload[i] = videoFile.read();
-        i++;
+        
         Serial.print(payload[i]);
+        i++;
     } 
   } else {
     // if the file isn't open, pop up an error:
