@@ -5,10 +5,9 @@
 const int chipSelect = BUILTIN_SDCARD;
 File videoFile;
 unsigned long video_size;
-
+unsigned long sayac_size;
 //XBee
 #include <XBee.h>
-
 XBee xbee = XBee();
 XBeeResponse response = XBeeResponse();
 
@@ -47,7 +46,9 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
+  File videoFile = SD.open("video.mp4", FILE_READ);
+  video_size = videoFile.size();
+  int i = 0;
   if (videoFile) {
     int i = 0;
     while(i<240){
@@ -63,8 +64,8 @@ void loop() {
   }
   Serial.println();
   XBee_Gonder();
-  video_size = video_size - 240;
-  if (video_size <= 0)
+  sayac_size += i;
+  if (video_size == sayac_size )
   {
     videoFile.close();
   }
